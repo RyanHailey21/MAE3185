@@ -1,6 +1,4 @@
-/**
- * Servo Motor Control using PWM on Raspberry Pi Pico
- * 
+/*
  * This program rotates a servo motor to 45°, waits 5 seconds,
  * then rotates to 150°, and repeats after 5 seconds.
  * 
