@@ -1,0 +1,14 @@
+# Target labels
+ picotoolBuild
+# Source files and their labels
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/CMakeFiles/picotoolBuild
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/CMakeFiles/picotoolBuild.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/CMakeFiles/picotoolBuild-complete.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule
+/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise2touchscreen/build/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule
