@@ -16,7 +16,7 @@
  // Command bytes
  #define TSC2007_CMD_READ_X 0xC0  // 12-bit resolution, power down between conversions
  #define TSC2007_CMD_READ_Y 0xD0  // 12-bit resolution, power down between conversions
- #define TSC2007_CMD_PENIRQ_ON 0x00  // Power down, PENIRQ enabled
+ // #define TSC2007_CMD_PENIRQ_ON 0x00  // Power down, PENIRQ enabled
  
  // Touch screen dimensions in mm
  #define SCREEN_WIDTH_MM 165.0f
