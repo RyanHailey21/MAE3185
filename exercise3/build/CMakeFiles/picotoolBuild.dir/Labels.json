@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/CMakeFiles/picotoolBuild"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/CMakeFiles/picotoolBuild.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/CMakeFiles/picotoolBuild-complete.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule"
+		},
+		{
+			"file" : "/home/rmh6127/testCode/MAE_3185_C_Programming_Files/exercise3/build/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"picotoolBuild"
+		],
+		"name" : "picotoolBuild"
+	}
+}
