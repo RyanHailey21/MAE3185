@@ -1,8 +1,3 @@
-/**
- * Ball Balancing System with Task Scheduler
- * Uses TSC2007 Touchscreen and Servo Motors with PID Control
- */
-
  #include <stdio.h>
  #include <pico/stdlib.h>
  #include <hardware/i2c.h>
@@ -32,12 +27,12 @@
  #define PULSE_WIDTH_MAX 2400  // Pulse width for 180° (in microseconds)
  
  // PID Controller constants
- #define PID_KP 0.5f         // Proportional gain
+ #define PID_KP 0.1f       // Proportional gain
  #define PID_KD 0.1f         // Derivative gain
- #define PID_KI 0.05f        // Integral gain
+ #define PID_KI 0.0f        // Integral gain
  
  // Ball detection threshold
- #define BALL_DETECTION_THRESHOLD 100  // Adjust based on your hardware
+ #define BALL_DETECTION_THRESHOLD 100  // Adjust based on hardware
  
  // Task scheduling
  #define TASK1_PERIOD_MS 5    // Touchscreen read task: 5ms (200Hz)
@@ -114,8 +109,8 @@
      pwm_set_enabled(slice_num_y, true);
      
      // Center both servos (90 degrees)
-     pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(90.0));
-     pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(90.0));
+     pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(180.0));
+     pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(180.0));
      
      printf("Servo motors initialized\n");
  }
@@ -193,18 +188,20 @@
      float tau_y = PID_KP * error_y + PID_KD * derivative_y + PID_KI * integral_y;
      
      // Convert torque to servo angle (90° is level, +/- adjustment based on PID)
-     float servo_x_angle = 90.0f - tau_x; // Invert if needed based on your setup
+     float servo_x_angle = 90.0f + tau_x; // Invert if needed based on your setup
      float servo_y_angle = 90.0f - tau_y; // Invert if needed based on your setup
-     
-     // Apply servo angle limits
-     if (servo_x_angle < 0.0f) servo_x_angle = 0.0f;
-     if (servo_x_angle > 180.0f) servo_x_angle = 180.0f;
-     if (servo_y_angle < 0.0f) servo_y_angle = 0.0f;
-     if (servo_y_angle > 180.0f) servo_y_angle = 180.0f;
-     
+    // Apply servo angle limits
+    if (servo_x_angle < 80.0f) servo_x_angle = 80.0f;
+    if (servo_x_angle > 100.0f) servo_x_angle = 100.0f;
+    if (servo_y_angle < 85.0f) servo_y_angle = 85.0f;
+    if (servo_y_angle > 100.0f) servo_y_angle = 100.0f;
+
      // Set servo positions
      pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(servo_x_angle));
      pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(servo_y_angle));
+     printf("Taux = %f Tauy = %f \n",tau_x,tau_y);
+     printf("Angle x = %f   Angle y = %f",servo_x_angle, servo_y_angle);
+
  }
  
  // Simple task scheduler
