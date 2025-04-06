@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
  #include <pico/stdlib.h>
  #include <hardware/i2c.h>
  #include <hardware/pwm.h>
@@ -27,17 +27,19 @@
  #define PULSE_WIDTH_MAX 2400  // Pulse width for 180° (in microseconds)
  
  // PID Controller constants
- #define PID_KP 0.1f       // Proportional gain
- #define PID_KD 0.1f         // Derivative gain
+ #define PID_KP 0.3f       // Proportional gain
+ #define PID_KD 8.0f         // Derivative gain
  #define PID_KI 0.0f        // Integral gain
  
  // Ball detection threshold
- #define BALL_DETECTION_THRESHOLD 100  // Adjust based on hardware
+ #define BALL_DETECTION_THRESHOLD 50  // Adjust based on hardware
  
  // Task scheduling
  #define TASK1_PERIOD_MS 5    // Touchscreen read task: 5ms (200Hz)
  #define TASK2_PERIOD_MS 20   // Motor control task: 20ms (50Hz)
- 
+ #define default_x_angle 83.0f
+ #define default_y_angle 96.0f
+
  // Global variables for ball position
  float ball_x_mm = 0.0f;
  float ball_y_mm = 0.0f;
@@ -149,8 +151,8 @@
      // Only run PID controller if ball is detected
      if (!ball_detected) {
          // Set platform to level position when no ball detected
-         pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(90.0));
-         pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(90.0));
+         pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(default_x_angle));
+         pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(default_y_angle));
          
          // Reset PID variables
          integral_x = 0.0f;
@@ -187,14 +189,14 @@
      float tau_x = PID_KP * error_x + PID_KD * derivative_x + PID_KI * integral_x;
      float tau_y = PID_KP * error_y + PID_KD * derivative_y + PID_KI * integral_y;
      
-     // Convert torque to servo angle (90° is level, +/- adjustment based on PID)
-     float servo_x_angle = 90.0f + tau_x; // Invert if needed based on your setup
-     float servo_y_angle = 90.0f - tau_y; // Invert if needed based on your setup
+     // Convert torque to servo angle (using default angles as base)
+     float servo_x_angle = default_x_angle + tau_x; // Using default_x_angle instead of 90.0f
+     float servo_y_angle = default_y_angle - tau_y; // Using default_y_angle instead of 90.0f
     // Apply servo angle limits
-    if (servo_x_angle < 80.0f) servo_x_angle = 80.0f;
-    if (servo_x_angle > 100.0f) servo_x_angle = 100.0f;
-    if (servo_y_angle < 85.0f) servo_y_angle = 85.0f;
-    if (servo_y_angle > 100.0f) servo_y_angle = 100.0f;
+    if (servo_x_angle < default_x_angle - 20.0f) servo_x_angle = default_x_angle - 20.0f;
+    if (servo_x_angle > default_x_angle + 20.0f) servo_x_angle = default_x_angle + 20.0f;
+    if (servo_y_angle < default_y_angle - 20.0f) servo_y_angle = default_y_angle - 20.0f;
+    if (servo_y_angle > default_y_angle + 20.0f) servo_y_angle = default_y_angle + 20.0f;
 
      // Set servo positions
      pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(servo_x_angle));
