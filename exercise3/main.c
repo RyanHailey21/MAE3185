@@ -40,6 +40,10 @@
  #define default_x_angle 83.0f
  #define default_y_angle 96.0f
 
+ // Data logging variables
+ bool logging_enabled = true;
+ uint32_t start_time_ms = 0;
+ 
  // Global variables for ball position
  float ball_x_mm = 0.0f;
  float ball_y_mm = 0.0f;
@@ -80,7 +84,7 @@
      
      i2c_init(i2c0, 100000);  // 100 kHz
      
-     printf("Touchscreen initialized\n");
+     // printf("Touchscreen initialized\n");
  }
  
  // Initialize servo motors
@@ -114,7 +118,7 @@
      pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(180.0));
      pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(180.0));
      
-     printf("Servo motors initialized\n");
+     // printf("Servo motors initialized\n");
  }
  
  // Read touchscreen task (runs at 200Hz)
@@ -141,8 +145,15 @@
          ball_x_mm = (float)x_raw / MAX_ADC_VALUE * SCREEN_WIDTH_MM;
          ball_y_mm = (float)y_raw / MAX_ADC_VALUE * SCREEN_HEIGHT_MM;
          
-         // Debug output (uncomment if needed)
-          printf("Ball position: X=%.2f mm, Y=%.2f mm\r\n", ball_x_mm, ball_y_mm);
+         // Log data in CSV format for plotting
+         if (logging_enabled) {
+             uint32_t current_time = to_ms_since_boot(get_absolute_time());
+             uint32_t elapsed_time = current_time - start_time_ms;
+             printf("DATA,%u,%.2f,%.2f\n", elapsed_time, ball_x_mm, ball_y_mm);
+         }
+         
+         // Debug output
+          // printf("Ball position: X=%.2f mm, Y=%.2f mm\r\n", ball_x_mm, ball_y_mm);
      }
  }
  
@@ -201,8 +212,8 @@
      // Set servo positions
      pwm_set_chan_level(slice_num_x, chan_x, angle_to_cc(servo_x_angle));
      pwm_set_chan_level(slice_num_y, chan_y, angle_to_cc(servo_y_angle));
-     printf("Taux = %f Tauy = %f \n",tau_x,tau_y);
-     printf("Angle x = %f   Angle y = %f",servo_x_angle, servo_y_angle);
+     // printf("Taux = %f Tauy = %f \n",tau_x,tau_y);
+     // printf("Angle x = %f   Angle y = %f",servo_x_angle, servo_y_angle);
 
  }
  
@@ -229,13 +240,17 @@
      stdio_init_all();
      sleep_ms(2000); // Give time for serial to initialize
      
-     printf("Ball Balancing System Starting\n");
+     // printf("Ball Balancing System Starting\n");
      
      // Initialize hardware
      init_touchscreen();
      init_servos();
      
-     printf("System ready, entering main loop\n");
+     // Initialize start time for data logging
+     start_time_ms = to_ms_since_boot(get_absolute_time());
+     printf("DATAHEADER,Time(ms),X(mm),Y(mm)\n");
+     
+     // printf("System ready, entering main loop\n");
      
      // Main loop
      while (true) {
