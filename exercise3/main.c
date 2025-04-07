@@ -217,7 +217,6 @@
 
  }
  
- // Simple task scheduler
  void task_scheduler() {
      static uint32_t last_task1_time = 0;
      static uint32_t last_task2_time = 0;
